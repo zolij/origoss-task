@@ -10,30 +10,19 @@ variable "location" {
 
 variable "environment" {
   type        = string
-  description = "Deployment environment name"
+  default     = "shared"
+  description = "Cluster environment identifier"
 }
 
 variable "subnet_id" {
   type        = string
-  description = "Subnet ID for the AKS default node pool"
-}
-
-variable "node_count" {
-  type        = number
-  default     = 2
-  description = "Number of worker nodes"
-}
-
-variable "vm_size" {
-  type        = string
-  default     = "Standard_B2s"
-  description = "VM size for worker nodes"
+  description = "Subnet ID for AKS node pools"
 }
 
 variable "api_server_authorized_ip_ranges" {
   type        = list(string)
   default     = null
-  description = "The IP ranges allowed to access the Kubernetes API server"
+  description = "Allowed IP ranges for Kubernetes API server"
 }
 
 variable "log_analytics_workspace_id" {
