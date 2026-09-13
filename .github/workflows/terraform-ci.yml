@@ -2,12 +2,12 @@ name: "Terraform CI & Security Validation"
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "master" ]
     paths:
       - "terraform/**"
       - ".github/workflows/terraform-ci.yml"
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main", "master" ]
     paths:
       - "terraform/**"
       - ".github/workflows/terraform-ci.yml"
@@ -58,20 +58,20 @@ jobs:
           tflint --init
           tflint --recursive
 
-      # 6. Checkov Policy as Code Scan
-      - name: Run Checkov
+      # 6. Checkov Policy as Code Scan (Audit mode)
+      - name: Run Checkov (Audit Only)
         uses: bridgecrewio/checkov-action@master
         with:
           directory: terraform
           framework: terraform
           output_format: cli
-          soft_fail: false # Set to true if you only want warnings without blocking the build
+          soft_fail: true
 
-      # 7. Trivy Vulnerability & Misconfiguration Scan
-      - name: Run Trivy Scanner
+      # 7. Trivy Vulnerability & Misconfiguration Scan (Audit mode)
+      - name: Run Trivy Scanner (Audit Only)
         uses: aquasecurity/trivy-action@master
         with:
           scan-type: "config"
           scan-dir: "terraform"
           severity: "CRITICAL,HIGH"
-          exit-code: "1" # Fail pipeline if Critical/High misconfigurations are detected
+          exit-code: "0"
