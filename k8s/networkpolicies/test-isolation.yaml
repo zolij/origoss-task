@@ -1,0 +1,36 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: isolate-test-environment
+  namespace: test
+spec:
+  podSelector: {} # Applies to all pods within the test namespace
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    # 1. Allow intra-namespace traffic
+    - from:
+        - podSelector: {}
+    # 2. Allow incoming traffic only from the Ingress Controller namespace
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: ingress-nginx
+  egress:
+    # 1. Allow DNS lookups to CoreDNS in kube-system
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+      ports:
+        - protocol: UDP
+          port: 53
+        - protocol: TCP
+          port: 53
+    # 2. Allow egress to external services and Azure MySQL subnet
+    - to:
+        - ipBlock:
+            cidr: 0.0.0.0/0
+            except:
+              - 10.0.1.0/24 # Block cross-pod traffic on the AKS internal subnet
