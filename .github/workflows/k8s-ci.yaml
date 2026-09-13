@@ -13,6 +13,7 @@ on:
       - "k8s/**"
       - "helm/**"
       - ".github/workflows/k8s-ci.yaml"
+  workflow_dispatch:
 
 permissions:
   contents: read

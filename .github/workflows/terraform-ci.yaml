@@ -11,6 +11,7 @@ on:
     paths:
       - "terraform/**"
       - ".github/workflows/terraform-ci.yaml"
+  workflow_dispatch:
 
 permissions:
   contents: read
