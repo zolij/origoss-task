@@ -6,13 +6,13 @@ on:
     paths:
       - "k8s/**"
       - "helm/**"
-      - ".github/workflows/k8s-ci.yml"
+      - ".github/workflows/k8s-ci.yaml"
   pull_request:
     branches: [ "main" ]
     paths:
       - "k8s/**"
       - "helm/**"
-      - ".github/workflows/k8s-ci.yml"
+      - ".github/workflows/k8s-ci.yaml"
 
 permissions:
   contents: read

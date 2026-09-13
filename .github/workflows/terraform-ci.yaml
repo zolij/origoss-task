@@ -2,15 +2,15 @@ name: "Terraform CI & Security Validation"
 
 on:
   push:
-    branches: [ "main", "master" ]
+    branches: [ "main" ]
     paths:
       - "terraform/**"
-      - ".github/workflows/terraform-ci.yml"
+      - ".github/workflows/terraform-ci.yaml"
   pull_request:
     branches: [ "main", "master" ]
     paths:
       - "terraform/**"
-      - ".github/workflows/terraform-ci.yml"
+      - ".github/workflows/terraform-ci.yaml"
 
 permissions:
   contents: read
