@@ -29,3 +29,15 @@ variable "vm_size" {
   default     = "Standard_B2s"
   description = "VM size for worker nodes"
 }
+
+variable "api_server_authorized_ip_ranges" {
+  type        = list(string)
+  default     = null
+  description = "The IP ranges allowed to access the Kubernetes API server"
+}
+
+variable "log_analytics_workspace_id" {
+  type        = string
+  default     = null
+  description = "ID of the Log Analytics Workspace for OMS Agent"
+}

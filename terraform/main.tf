@@ -35,10 +35,19 @@ module "database" {
   db_admin_password   = var.db_admin_password
 }
 
-module "aks" {
-  source              = "./modules/aks"
-  resource_group_name = azurerm_resource_group.rg.name
+resource "azurerm_log_analytics_workspace" "logs" {
+  name                = "law-ghost-${var.environment}"
   location            = azurerm_resource_group.rg.location
-  environment         = var.environment
-  subnet_id           = module.network.aks_subnet_id
+  resource_group_name = azurerm_resource_group.rg.name
+  sku                 = "PerGB2018"
+  retention_in_days   = 30
+}
+
+module "aks" {
+  source                     = "./modules/aks"
+  resource_group_name        = azurerm_resource_group.rg.name
+  location                   = azurerm_resource_group.rg.location
+  environment                = var.environment
+  subnet_id                  = module.network.aks_subnet_id
+  log_analytics_workspace_id = azurerm_log_analytics_workspace.logs.id
 }

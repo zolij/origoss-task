@@ -22,6 +22,9 @@ resource "azurerm_mysql_flexible_server" "db" {
   delegated_subnet_id = var.delegated_subnet_id
   private_dns_zone_id = azurerm_private_dns_zone.db_dns.id
 
+  # Explicitly disable public network access
+  public_network_access_enabled = "Disabled"
+
   backup_retention_days        = 7
   geo_redundant_backup_enabled = false
 }
