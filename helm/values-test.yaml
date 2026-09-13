@@ -1,2 +1,56 @@
+# Disable default internal MySQL engine
+mysql:
+  enabled: false
+
+# External Azure Database for MySQL Flexible Server integration (Test instance/schema)
+externalDatabase:
+  host: "mysql-ghost-test.ghost-test.mysql.database.azure.com"
+  port: 3306
+  user: "ghostadmin"
+  password: "TestEnvironmentPassword123!"
+  database: "ghost_test"
+
+# Ghost CMS routing configuration for test environment
+ghostHost: "test.blog.mycompany.com"
+ghostProtocol: "https"
+ghostPath: "/"
+
+# Persistent storage for uploaded media and themes
+persistence:
+  enabled: true
+  storageClass: "managed-csi"
+  accessMode: ReadWriteOnce
+  size: 5Gi
+
+# Target the non-production node pool (no taints/tolerations required)
 nodeSelector:
   workload: nonprod
+
+# Security context enforcing non-root execution
+podSecurityContext:
+  enabled: true
+  fsGroup: 1001
+
+containerSecurityContext:
+  enabled: true
+  runAsUser: 1001
+  runAsNonRoot: true
+
+# Ingress configuration with automated TLS termination
+ingress:
+  enabled: true
+  ingressClassName: "nginx"
+  hostname: "test.blog.mycompany.com"
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+  tls: true
+
+# Resource requests and limits sized for testing workloads
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 100m
+    memory: 256Mi
