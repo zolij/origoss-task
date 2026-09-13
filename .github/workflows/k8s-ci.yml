@@ -1,0 +1,75 @@
+name: "Kubernetes & Helm CI Validation"
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - "k8s/**"
+      - "helm/**"
+      - ".github/workflows/k8s-ci.yml"
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - "k8s/**"
+      - "helm/**"
+      - ".github/workflows/k8s-ci.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-k8s:
+    name: "Validate K8s Manifests & Helm Charts"
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout repository
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # 2. Setup Helm CLI
+      - name: Setup Helm
+        uses: azure/setup-helm@v4
+        with:
+          version: "v3.14.0"
+
+      # 3. Helm Dependency & Lint
+      - name: Add Bitnami Helm Repo
+        run: |
+          helm repo add bitnami https://charts.bitnami.com/bitnami
+          helm repo update
+
+      - name: Helm Template & Lint Test Values
+        run: |
+          mkdir -p output
+          helm template ghost bitnami/ghost -f helm/values-test.yaml > output/rendered-ghost.yaml
+          helm lint helm/values-test.yaml || true
+
+      # 4. Kubeconform (Schema Validation for static & rendered manifests)
+      - name: Validate Kubernetes Manifests with Kubeconform
+        run: |
+          curl -sL https://github.com/yannh/kubeconform/releases/latest/download/kubeconform-linux-amd64.tar.gz | tar xz
+          sudo mv kubeconform /usr/local/bin/
+
+          # Validate static YAML manifests (ignoring CRD schemas like ClusterIssuer)
+          kubeconform -summary -ignore-missing-schemas -kubernetes-version 1.29.0 k8s/
+
+          # Validate Helm rendered manifests
+          kubeconform -summary -ignore-missing-schemas -kubernetes-version 1.29.0 output/rendered-ghost.yaml
+
+      # 5. Kube-linter (Security & Best Practices Audit)
+      - name: Scan with Kube-linter
+        uses: stackrox/kube-linter-action@v1
+        with:
+          directory: "k8s"
+          config: .github/kube-linter-config.yaml
+        continue-on-error: true
+
+      # 6. Trivy Scanner for Kubernetes Misconfigurations
+      - name: Trivy K8s Misconfiguration Scan (Audit Only)
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: "config"
+          scan-ref: "k8s"
+          severity: "CRITICAL,HIGH"
+          exit-code: "0"
