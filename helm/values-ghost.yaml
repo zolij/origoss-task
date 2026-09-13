@@ -1,0 +1,53 @@
+# Disable bundled MySQL (using Azure Database for MySQL Flexible Server)
+mysql:
+  enabled: false
+
+# External Azure MySQL Configuration
+externalDatabase:
+  host: "mysql-ghost-test.ghost-test.mysql.database.azure.com"
+  port: 3306
+  user: "ghostadmin"
+  password: "SuperSecretPassword123!" # In prod: reference an existing K8s secret
+  database: "ghost"
+
+# Ghost Application Settings
+ghostHost: "blog.example.com"
+ghostProtocol: "https"
+ghostPath: "/"
+
+# Persistence for /bitnami/ghost
+persistence:
+  enabled: true
+  storageClass: "managed-csi"
+  accessMode: ReadWriteOnce
+  size: 10Gi
+
+# Security Context & Best Practices
+podSecurityContext:
+  enabled: true
+  fsGroup: 1001
+
+containerSecurityContext:
+  enabled: true
+  runAsUser: 1001
+  runAsNonRoot: true
+
+# Ingress Configuration with cert-manager
+ingress:
+  enabled: true
+  ingressClassName: "nginx"
+  hostname: "blog.example.com"
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+  tls: true
+
+# Resources
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 100m
+    memory: 256Mi
