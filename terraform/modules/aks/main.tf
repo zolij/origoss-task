@@ -17,13 +17,13 @@ resource "azurerm_kubernetes_cluster" "aks" {
   sku_tier = var.environment == "prod" ? "Standard" : "Free"
 
   default_node_pool {
-    name                 = "systempool"
-    node_count           = var.node_count
-    vm_size              = var.vm_size
-    vnet_subnet_id       = var.subnet_id
-    os_disk_size_gb      = 30
-    max_pods             = 50
-    enable_host_encryption = true
+    name                         = "systempool"
+    node_count                   = var.node_count
+    vm_size                      = var.vm_size
+    vnet_subnet_id               = var.subnet_id
+    os_disk_size_gb              = 30
+    max_pods                     = 50
+    enable_host_encryption       = true
     only_critical_addons_enabled = false # Set true in production when dedicated user node pool is present
   }
 
