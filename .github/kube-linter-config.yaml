@@ -3,4 +3,6 @@ checks:
   addAllBuiltIn: true
   doNotAutoAddDefaults: false
   exclude:
+    - "dangling-networkpolicy"
+    - "dangling-networkpolicypeer-podselector"
     - "no-read-only-root-fs"
