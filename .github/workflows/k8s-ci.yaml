@@ -33,7 +33,7 @@ jobs:
         with:
           version: "v3.14.0"
 
-      # 3. Helm Dependency & Lint
+      # 3. Helm Dependency, Template & Lint
       - name: Add Bitnami Helm Repo
         run: |
           helm repo add bitnami https://charts.bitnami.com/bitnami
@@ -42,8 +42,12 @@ jobs:
       - name: Helm Template & Lint Test Values
         run: |
           mkdir -p output
+          # Render the templates using the Bitnami chart and test values
           helm template ghost bitnami/ghost -f helm/values-test.yaml > output/rendered-ghost.yaml
-          helm lint helm/values-test.yaml || true
+          
+          # Pull and lint the chart directory with the custom values
+          helm pull bitnami/ghost --untar --untardir /tmp
+          helm lint /tmp/ghost -f helm/values-test.yaml
 
       # 4. Kubeconform (Schema Validation for static & rendered manifests)
       - name: Validate Kubernetes Manifests with Kubeconform
