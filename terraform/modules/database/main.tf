@@ -23,7 +23,7 @@ resource "azurerm_mysql_flexible_server" "db" {
   private_dns_zone_id = azurerm_private_dns_zone.db_dns.id
 
   # Explicitly disable public network access
-  public_network_access_enabled = "Disabled"
+  public_network_access_enabled = false
 
   backup_retention_days        = 7
   geo_redundant_backup_enabled = false
