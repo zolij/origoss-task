@@ -39,11 +39,10 @@ containerSecurityContext:
 # Ingress configuration with automated TLS termination
 ingress:
   enabled: true
-  ingressClassName: "nginx"
+  ingressClassName: "traefik"
   hostname: "test.blog.mycompany.com"
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
   tls: true
 
 # Resource requests and limits sized for testing workloads
