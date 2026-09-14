@@ -53,13 +53,13 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
 # 2. Non-Production Node Pool (Test & Acceptance Workloads)
 resource "azurerm_kubernetes_cluster_node_pool" "nonprod" {
-  name                   = "nonprodpool"
-  kubernetes_cluster_id  = azurerm_kubernetes_cluster.aks.id
-  vm_size                = "Standard_B2s"
-  node_count             = 2
-  vnet_subnet_id         = var.subnet_id
-  os_disk_size_gb        = 30
-  max_pods               = 50
+  name                    = "nonprodpool"
+  kubernetes_cluster_id   = azurerm_kubernetes_cluster.aks.id
+  vm_size                 = "Standard_B2s"
+  node_count              = 2
+  vnet_subnet_id          = var.subnet_id
+  os_disk_size_gb         = 30
+  max_pods                = 50
   host_encryption_enabled = true
 
   node_labels = {
@@ -70,13 +70,13 @@ resource "azurerm_kubernetes_cluster_node_pool" "nonprod" {
 
 # 3. Production Node Pool (Isolated with Taint)
 resource "azurerm_kubernetes_cluster_node_pool" "prod" {
-  name                   = "prodpool"
-  kubernetes_cluster_id  = azurerm_kubernetes_cluster.aks.id
-  vm_size                = "Standard_D2s_v5" # Higher performance SKU
-  node_count             = 2
-  vnet_subnet_id         = var.subnet_id
-  os_disk_size_gb        = 50
-  max_pods               = 50
+  name                    = "prodpool"
+  kubernetes_cluster_id   = azurerm_kubernetes_cluster.aks.id
+  vm_size                 = "Standard_D2s_v5" # Higher performance SKU
+  node_count              = 2
+  vnet_subnet_id          = var.subnet_id
+  os_disk_size_gb         = 50
+  max_pods                = 50
   host_encryption_enabled = true
 
   node_labels = {
