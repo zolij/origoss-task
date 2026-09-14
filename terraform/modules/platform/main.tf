@@ -7,10 +7,12 @@ resource "helm_release" "traefik" {
   namespace        = "traefik"
   create_namespace = true
 
-  set {
-    name  = "nodeSelector.workload"
-    value = "system"
-  }
+  set = [
+    {
+      name  = "nodeSelector.workload"
+      value = "system"
+    }
+  ]
 }
 
 # Cert-Manager for Automated TLS
@@ -22,13 +24,14 @@ resource "helm_release" "cert_manager" {
   namespace        = "cert-manager"
   create_namespace = true
 
-  set {
-    name  = "installCRDs"
-    value = "true"
-  }
-
-  set {
-    name  = "nodeSelector.workload"
-    value = "system"
-  }
+  set = [
+    {
+      name  = "installCRDs"
+      value = "true"
+    },
+    {
+      name  = "nodeSelector.workload"
+      value = "system"
+    }
+  ]
 }
