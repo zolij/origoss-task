@@ -95,7 +95,7 @@ Has an explicit `depends_on = [module.aks]` to guarantee the cluster API is reac
 
 ## Application Deployment (`helm/values-test.yaml`)
 
-Helm values for the Ghost CMS chart, `test` environment:
+Helm values for the [Bitnami `ghost` chart](https://github.com/bitnami/charts/tree/main/bitnami/ghost) (`bitnami/ghost`, repo `https://charts.bitnami.com/bitnami`), `test` environment:
 
 - **Database:** external MySQL, host `mysql-ghost-test.ghost-test.mysql.database.azure.com`, port 3306, user `ghostadmin`, database `ghost_test` (matches the Terraform `database` module output).
 - **Ghost host/protocol:** `test.blog.mycompany.com` over `https`.
@@ -104,6 +104,16 @@ Helm values for the Ghost CMS chart, `test` environment:
 - **Security context:** pod `fsGroup: 1001`; container `runAsUser: 1001`, `runAsNonRoot: true`.
 - **Ingress:** enabled, `traefik` ingress class, TLS via the `letsencrypt-prod` `ClusterIssuer`.
 - **Resources:** requests `100m`/`256Mi`, limits `500m`/`512Mi`.
+
+### Installing the chart
+
+```bash
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm repo update
+helm upgrade --install ghost-test bitnami/ghost \
+  --namespace test \
+  --values helm/values-test.yaml
+```
 
 ## End-to-End Request Flow
 
