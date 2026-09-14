@@ -6,10 +6,16 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
   role_based_access_control_enabled = true
   azure_policy_enabled              = true
-  automatic_channel_upgrade         = "patch"
+  automatic_upgrade_channel         = "patch"
   local_account_disabled            = true
 
-  api_server_authorized_ip_ranges = var.api_server_authorized_ip_ranges != null ? var.api_server_authorized_ip_ranges : ["0.0.0.0/0"]
+  node_provisioning_profile {
+    mode = "Manual"
+  }
+
+  api_server_access_profile {
+    authorized_ip_ranges = var.api_server_authorized_ip_ranges != null ? var.api_server_authorized_ip_ranges : ["0.0.0.0/0"]
+  }
 
   # 1. System Node Pool (Critical System Pods Only)
   default_node_pool {
@@ -19,7 +25,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     vnet_subnet_id               = var.subnet_id
     os_disk_size_gb              = 30
     max_pods                     = 50
-    enable_host_encryption       = true
+    host_encryption_enabled      = true
     only_critical_addons_enabled = true
   }
 
@@ -54,7 +60,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "nonprod" {
   vnet_subnet_id         = var.subnet_id
   os_disk_size_gb        = 30
   max_pods               = 50
-  enable_host_encryption = true
+  host_encryption_enabled = true
 
   node_labels = {
     "workload"    = "nonprod"
@@ -71,7 +77,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "prod" {
   vnet_subnet_id         = var.subnet_id
   os_disk_size_gb        = 50
   max_pods               = 50
-  enable_host_encryption = true
+  host_encryption_enabled = true
 
   node_labels = {
     "workload"    = "production"
