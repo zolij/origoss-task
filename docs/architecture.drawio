@@ -1,142 +1,118 @@
-<mxfile host="app.diagrams.net" agent="Copilot" version="24.7.0">
+<mxfile host="Electron" agent="Copilot">
   <diagram id="ghost-architecture" name="Architecture">
-    <mxGraphModel dx="1400" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+    <mxGraphModel dx="2934" dy="2401" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-
-        <!-- External -->
-        <mxCell id="ext_dns" value="DNS&#10;test.blog.mycompany.com" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1">
-          <mxGeometry x="40" y="40" width="200" height="50" as="geometry" />
+        <mxCell id="ext_dns" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" value="DNS&#xa;test.blog.mycompany.com" vertex="1">
+          <mxGeometry height="50" width="200" x="600" y="-100" as="geometry" />
         </mxCell>
-        <mxCell id="ext_le" value="Let's Encrypt ACME&#10;(acme-v02.api.letsencrypt.org)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1">
-          <mxGeometry x="40" y="120" width="200" height="50" as="geometry" />
+        <mxCell id="ext_le" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" value="Let&#39;s Encrypt ACME&#xa;(acme-v02.api.letsencrypt.org)" vertex="1">
+          <mxGeometry height="50" width="200" x="1600" y="395" as="geometry" />
         </mxCell>
-
-        <!-- Azure Subscription -->
-        <mxCell id="azure" value="Azure Subscription" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
-          <mxGeometry x="320" y="40" width="1220" height="1080" as="geometry" />
+        <mxCell id="azure" parent="1" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Azure Subscription" vertex="1">
+          <mxGeometry height="1080" width="1220" x="270" y="40" as="geometry" />
         </mxCell>
-
-        <mxCell id="rg" value="Resource Group: rg-ghost-{environment}" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#ffffff;strokeColor=#6c8ebf;" vertex="1" parent="1">
-          <mxGeometry x="340" y="70" width="1180" height="1030" as="geometry" />
+        <mxCell id="rg" parent="1" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#ffffff;strokeColor=#6c8ebf;" value="Resource Group: rg-ghost-{environment}" vertex="1">
+          <mxGeometry height="1030" width="1180" x="290" y="70" as="geometry" />
         </mxCell>
-
-        <mxCell id="loganalytics" value="Log Analytics Workspace&#10;law-ghost-{environment}&#10;30-day retention" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
-          <mxGeometry x="1080" y="100" width="220" height="60" as="geometry" />
+        <mxCell id="loganalytics" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="Log Analytics Workspace&#xa;law-ghost-{environment}&#xa;30-day retention" vertex="1">
+          <mxGeometry height="60" width="220" x="1060" y="70" as="geometry" />
         </mxCell>
-
-        <!-- Network module -->
-        <mxCell id="net_group" value="modules/network" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
-          <mxGeometry x="370" y="100" width="360" height="280" as="geometry" />
+        <mxCell id="net_group" parent="1" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#fff2cc;strokeColor=#d6b656;" value="modules/network" vertex="1">
+          <mxGeometry height="280" width="360" x="320" y="100" as="geometry" />
         </mxCell>
-        <mxCell id="vnet" value="VNet: vnet-ghost-{environment}&#10;10.0.0.0/16" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
-          <mxGeometry x="390" y="135" width="320" height="40" as="geometry" />
+        <mxCell id="vnet" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="VNet: vnet-ghost-{environment}&#xa;10.0.0.0/16" vertex="1">
+          <mxGeometry height="40" width="320" x="340" y="135" as="geometry" />
         </mxCell>
-        <mxCell id="snet_aks" value="Subnet: snet-aks&#10;10.0.1.0/24&#10;NSG: nsg-aks-{environment}" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
-          <mxGeometry x="390" y="195" width="150" height="65" as="geometry" />
+        <mxCell id="snet_aks" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="Subnet: snet-aks&#xa;10.0.1.0/24&#xa;NSG: nsg-aks-{environment}" vertex="1">
+          <mxGeometry height="65" width="150" x="500" y="187.5" as="geometry" />
         </mxCell>
-        <mxCell id="snet_db" value="Subnet: snet-db&#10;10.0.2.0/24 (delegated)&#10;NSG: nsg-db-{environment}" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
-          <mxGeometry x="560" y="195" width="150" height="65" as="geometry" />
+        <mxCell id="snet_db" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="Subnet: snet-db&#xa;10.0.2.0/24 (delegated)&#xa;NSG: nsg-db-{environment}" vertex="1">
+          <mxGeometry height="65" width="150" x="340" y="185" as="geometry" />
         </mxCell>
-        <mxCell id="net_outputs" value="outputs: vnet_id, aks_subnet_id, db_subnet_id" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;" vertex="1" parent="1">
-          <mxGeometry x="390" y="280" width="320" height="30" as="geometry" />
+        <mxCell id="db_group" parent="1" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#fff2cc;strokeColor=#d6b656;" value="modules/database" vertex="1">
+          <mxGeometry height="220" width="360" x="320" y="410" as="geometry" />
         </mxCell>
-
-        <!-- Database module -->
-        <mxCell id="db_group" value="modules/database" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
-          <mxGeometry x="370" y="410" width="360" height="220" as="geometry" />
+        <mxCell id="dns_zone" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" value="Private DNS Zone&#xa;ghost-{environment}.mysql.database.azure.com" vertex="1">
+          <mxGeometry height="45" width="320" x="340" y="445" as="geometry" />
         </mxCell>
-        <mxCell id="dns_zone" value="Private DNS Zone&#10;ghost-{environment}.mysql.database.azure.com" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
-          <mxGeometry x="390" y="445" width="320" height="45" as="geometry" />
+        <mxCell id="mysql" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" value="MySQL Flexible Server&#xa;mysql-ghost-{environment}&#xa;SKU: B_Standard_B1ms, zone 1&#xa;7-day backup, no geo-redundancy" vertex="1">
+          <mxGeometry height="70" width="320" x="340" y="505" as="geometry" />
         </mxCell>
-        <mxCell id="mysql" value="MySQL Flexible Server&#10;mysql-ghost-{environment}&#10;SKU: B_Standard_B1ms, zone 1&#10;7-day backup, no geo-redundancy" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
-          <mxGeometry x="390" y="505" width="320" height="70" as="geometry" />
+        <mxCell id="mysql_db" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" value="Database: ghost&#xa;utf8mb4 / utf8mb4_unicode_ci" vertex="1">
+          <mxGeometry height="35" width="320" x="340" y="585" as="geometry" />
         </mxCell>
-        <mxCell id="mysql_db" value="Database: ghost&#10;utf8mb4 / utf8mb4_unicode_ci" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
-          <mxGeometry x="390" y="585" width="320" height="35" as="geometry" />
+        <mxCell id="aks_group" parent="1" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#fff2cc;strokeColor=#d6b656;" value="modules/aks" vertex="1">
+          <mxGeometry height="670" width="720" x="720" y="280" as="geometry" />
         </mxCell>
-
-        <!-- AKS module -->
-        <mxCell id="aks_group" value="modules/aks" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
-          <mxGeometry x="770" y="150" width="720" height="500" as="geometry" />
+        <mxCell id="aks_cluster" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="AKS Cluster: aks-ghost-{environment}&#xa;RBAC + Azure Policy enabled, local accounts disabled&#xa;Azure CNI + Azure Network Policy, Standard LB&#xa;Key Vault secret rotation, OMS agent" vertex="1">
+          <mxGeometry height="70" width="680" x="740" y="185" as="geometry" />
         </mxCell>
-        <mxCell id="aks_cluster" value="AKS Cluster: aks-ghost-{environment}&#10;RBAC + Azure Policy enabled, local accounts disabled&#10;Azure CNI + Azure Network Policy, Standard LB&#10;Key Vault secret rotation, OMS agent" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
-          <mxGeometry x="790" y="185" width="680" height="70" as="geometry" />
+        <mxCell id="pool_system" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="systempool (default)&#xa;2 x Standard_B2s&#xa;CriticalAddonsOnly taint" vertex="1">
+          <mxGeometry height="65" width="215" x="740" y="270" as="geometry" />
         </mxCell>
-        <mxCell id="pool_system" value="systempool (default)&#10;2 x Standard_B2s&#10;CriticalAddonsOnly taint" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
-          <mxGeometry x="790" y="270" width="215" height="65" as="geometry" />
+        <mxCell id="pool_nonprod" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="nonprodpool&#xa;2 x Standard_B2s&#xa;labels: workload=nonprod" vertex="1">
+          <mxGeometry height="65" width="215" x="980" y="270" as="geometry" />
         </mxCell>
-        <mxCell id="pool_nonprod" value="nonprodpool&#10;2 x Standard_B2s&#10;labels: workload=nonprod" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
-          <mxGeometry x="1030" y="270" width="215" height="65" as="geometry" />
+        <mxCell id="pool_prod" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="prodpool&#xa;2 x Standard_D2s_v5&#xa;labels: workload=production&#xa;taint: NoSchedule" vertex="1">
+          <mxGeometry height="65" width="200" x="1220" y="270" as="geometry" />
         </mxCell>
-        <mxCell id="pool_prod" value="prodpool&#10;2 x Standard_D2s_v5&#10;labels: workload=production&#10;taint: NoSchedule" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
-          <mxGeometry x="1270" y="270" width="200" height="65" as="geometry" />
+        <mxCell id="platform_group" parent="1" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#fff2cc;strokeColor=#d6b656;" value="modules/platform (Helm releases)" vertex="1">
+          <mxGeometry height="115" width="680" x="740" y="355" as="geometry" />
         </mxCell>
-
-        <!-- Platform module: helm releases -->
-        <mxCell id="platform_group" value="modules/platform (Helm releases)" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
-          <mxGeometry x="790" y="355" width="680" height="115" as="geometry" />
+        <mxCell id="traefik" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="Traefik Ingress Controller&#xa;traefik/traefik v26.0.0&#xa;ns: traefik | nodeSelector: workload=system" vertex="1">
+          <mxGeometry height="65" width="310" x="760" y="390" as="geometry" />
         </mxCell>
-        <mxCell id="traefik" value="Traefik Ingress Controller&#10;traefik/traefik v26.0.0&#10;ns: traefik | nodeSelector: workload=system" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
-          <mxGeometry x="810" y="390" width="310" height="65" as="geometry" />
+        <mxCell id="certmanager" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="cert-manager&#xa;jetstack/cert-manager v1.14.4&#xa;ns: cert-manager | nodeSelector: workload=system" vertex="1">
+          <mxGeometry height="65" width="310" x="1100" y="388" as="geometry" />
         </mxCell>
-        <mxCell id="certmanager" value="cert-manager&#10;jetstack/cert-manager v1.14.4&#10;ns: cert-manager | nodeSelector: workload=system" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
-          <mxGeometry x="1140" y="390" width="310" height="65" as="geometry" />
+        <mxCell id="k8s_group" parent="1" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#fff2cc;strokeColor=#d6b656;" value="Kubernetes objects (k8s/ manifests + helm/values-test.yaml)" vertex="1">
+          <mxGeometry height="385" width="680" x="740" y="505" as="geometry" />
         </mxCell>
-
-        <!-- Kubernetes manifests / workloads -->
-        <mxCell id="k8s_group" value="Kubernetes objects (k8s/ manifests + helm/values-test.yaml)" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
-          <mxGeometry x="790" y="490" width="680" height="290" as="geometry" />
+        <mxCell id="cluster_issuer" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="ClusterIssuer: letsencrypt-prod&#xa;HTTP-01 solver via Traefik" vertex="1">
+          <mxGeometry height="55" width="310" x="1100" y="575" as="geometry" />
         </mxCell>
-        <mxCell id="cluster_issuer" value="ClusterIssuer: letsencrypt-prod&#10;HTTP-01 solver via Traefik" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
-          <mxGeometry x="810" y="525" width="310" height="55" as="geometry" />
+        <mxCell id="test_ns" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="Namespace: test&#xa;ResourceQuota: 4 CPU / 4Gi / 10 pods&#xa;LimitRange: 500m/512Mi limit, 100m/256Mi req" vertex="1">
+          <mxGeometry height="65" width="310" x="760" y="690" as="geometry" />
         </mxCell>
-        <mxCell id="test_ns" value="Namespace: test&#10;ResourceQuota: 4 CPU / 4Gi / 10 pods&#10;LimitRange: 500m/512Mi limit, 100m/256Mi req" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
-          <mxGeometry x="810" y="595" width="310" height="65" as="geometry" />
+        <mxCell id="netpol" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="NetworkPolicy: isolate-test-environment&#xa;allow intra-ns + traefik ingress, DNS egress&#xa;deny egress to 10.0.1.0/24" vertex="1">
+          <mxGeometry height="65" width="310" x="1100" y="690" as="geometry" />
         </mxCell>
-        <mxCell id="netpol" value="NetworkPolicy: isolate-test-environment&#10;allow intra-ns + traefik ingress, DNS egress&#10;deny egress to 10.0.1.0/24" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
-          <mxGeometry x="1140" y="595" width="310" height="65" as="geometry" />
+        <mxCell id="ghost_pod" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Ghost CMS (Helm release)&#xa;host: test.blog.mycompany.com&#xa;nodeSelector: workload=nonprod&#xa;PVC: 5Gi managed-csi&#xa;runAsUser 1001 / non-root" vertex="1">
+          <mxGeometry height="85" width="310" x="925" y="790" as="geometry" />
         </mxCell>
-        <mxCell id="ghost_pod" value="Ghost CMS (Helm release)&#10;host: test.blog.mycompany.com&#10;nodeSelector: workload=nonprod&#10;PVC: 5Gi managed-csi&#10;runAsUser 1001 / non-root" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
-          <mxGeometry x="975" y="675" width="310" height="85" as="geometry" />
+        <mxCell id="e1" edge="1" parent="1" source="ext_dns" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="traefik">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="700" y="422.5" />
+            </Array>
+          </mxGeometry>
         </mxCell>
-
-        <!-- Edges -->
-        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="ext_dns" target="traefik">
+        <mxCell id="e2" edge="1" parent="1" source="certmanager" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;" target="ext_le">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;" edge="1" parent="1" source="certmanager" target="ext_le">
+        <mxCell id="e3" edge="1" parent="1" source="snet_aks" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;" target="aks_cluster" value="aks_subnet_id">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e3" value="aks_subnet_id" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;" edge="1" parent="1" source="snet_aks" target="aks_cluster">
+        <mxCell id="e4" edge="1" parent="1" source="snet_db" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;" target="dns_zone" value="delegated_subnet_id / vnet_id">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e4" value="delegated_subnet_id / vnet_id" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;" edge="1" parent="1" source="snet_db" target="dns_zone">
+        <mxCell id="e6" edge="1" parent="1" source="aks_cluster" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;" target="loganalytics" value="logs">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e5" value="kube_config" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;" edge="1" parent="1" source="aks_cluster" target="platform_group">
+        <mxCell id="e7" edge="1" parent="1" source="traefik" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="ghost_pod">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1080" y="422.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="ghost_pod" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" target="mysql_db" value="mysql_fqdn / ghost_test db">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e6" value="logs" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;" edge="1" parent="1" source="aks_cluster" target="loganalytics">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="traefik" target="ghost_pod">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e8" value="TLS cert" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="cluster_issuer" target="ghost_pod">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e9" value="mysql_fqdn / ghost_test db" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="ghost_pod" target="mysql_db">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" parent="1" source="ghost_pod" target="pool_nonprod">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-
-        <!-- Legend -->
-        <mxCell id="legend" value="Legend&#10;Yellow box = Terraform module&#10;Dashed arrow = Terraform input/output wiring&#10;Solid arrow = runtime traffic / data flow" style="text;html=1;align=left;verticalAlign=top;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="40" y="200" width="240" height="80" as="geometry" />
+        <mxCell id="legend" parent="1" style="text;html=1;align=left;verticalAlign=top;fontSize=11;" value="Legend&#xa;Yellow box = Terraform module&#xa;Dashed arrow = Terraform input/output wiring&#xa;Solid arrow = runtime traffic / data flow" vertex="1">
+          <mxGeometry height="80" width="240" x="1210" y="1000" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
